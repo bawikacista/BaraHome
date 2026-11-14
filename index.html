@@ -21,14 +21,6 @@ a{color:inherit}
 header{position:sticky;top:0;z-index:20;background:linear-gradient(100deg,var(--brand) 0%,var(--bright) 100%);color:var(--on-brand)}
 nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
 .logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;font:800 1.3rem "Bricolage Grotesque",sans-serif}
-.logo img{height:2.4rem;width:auto;display:block;filter:drop-shadow(0 0 4px rgba(255,255,255,.4));animation:pop .8s cubic-bezier(.2,1.4,.4,1) backwards,glow 3.2s ease-in-out 1s infinite;transition:transform .3s}
-.logo:hover img{transform:rotate(-6deg) scale(1.12)}
-.nm{font-size:1.5rem;letter-spacing:-.01em;background:linear-gradient(100deg,#fff 0%,#fff 35%,#B8E0FF 50%,#fff 65%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:rise .7s .15s ease-out backwards,shine 4s linear 1s infinite}
-@keyframes pop{from{opacity:0;transform:translateY(-.8rem) scale(.6)}}
-@keyframes rise{from{opacity:0;transform:translateX(-.8rem)}}
-@keyframes glow{50%{filter:drop-shadow(0 0 10px rgba(255,255,255,.95))}}
-@keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
-@media (prefers-reduced-motion:reduce){.logo img,.nm{animation:none}}
 .js .rv{opacity:0;transform:translateY(1.8rem);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
 .js .rv:nth-child(2){transition-delay:.12s}.js .rv:nth-child(3){transition-delay:.24s}.js .rv:nth-child(4){transition-delay:.36s}.js .rv:nth-child(n+5){transition-delay:.4s}
@@ -311,9 +303,8 @@ form .btn{text-align:center}
 .wbox label.pill{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:2rem;padding:.35rem .85rem;cursor:pointer;background:var(--bg);font-weight:500}
 .pill input{display:none}
 .pill:has(input:checked){background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
-.nm{background:none;-webkit-text-fill-color:#fff;color:#fff;animation:none!important;font-size:1.6rem;white-space:nowrap}
-.logo img{height:2.5rem;animation:none!important;filter:none!important;transition:none}
-.logo:hover img{transform:none;filter:none}
+.logo img{height:2.5rem;width:auto;display:block;animation:none;filter:none;transition:none}
+.nm{font-size:1.6rem;color:#fff;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -605,6 +596,7 @@ nx.onclick=function(){C();var m=chk();if(m){err.textContent=m;return}st++;R()};
 bk.onclick=function(){C();if(st===1){exit();return}st--;R()};
 document.querySelectorAll('#v-layanan [data-plan]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();start(a.dataset.plan)})});
 })();
+document.querySelectorAll('video').forEach(function(v){v.addEventListener('error',function(){var a=v.getAttribute('src')||'',m=a.match(/^(video\/)?([\w-]+\.mp4)$/);if(!m||v.dataset.retry)return;v.dataset.retry=1;v.src=m[1]?m[2]:'video/'+m[2];v.load();if(v.hasAttribute('autoplay')){var q=v.play();if(q&&q.catch)q.catch(function(){})}})});
 </script>
 </body>
 </html>
